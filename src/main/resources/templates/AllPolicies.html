@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>See Policies</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        table, th, td {
+            border: 1px solid #666;
+        }
+
+        table th, table td {
+            padding: 10px;
+        }
+
+        .row_name {
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body style="height: 100%;display: flex;flex-direction: column;align-items: center">
+<div class="jumbotron jumbotron-fluid text-center" style="width: 100%">
+    <div class="container">
+        <h1 class="display-4">Welcome User !!</h1>
+        <p class="lead">See Your Policies Here</p>
+    </div>
+</div>
+<div style="border:2px black solid;width:80%;display: flex;flex-direction: column">
+    <table>
+        <thead>
+        <tr>
+            <th class="row_name">Serial No.</th>
+            <th class="row_name"> Policy Name</th>
+            <th class="row_name">Task</th>
+            <th class="row_name">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="getPolicy,iter : ${getAllPolicy}">
+            <td th:height="50px" th:width="400px" th:text="${iter.count}">Serial No.</td>
+            <td th:height="50px" th:width="400px" th:text="${getPolicy.policy_name}">Risk Id</td>
+            <td th:height="50px" th:width="400px" th:text="${getPolicy.status}">Task</td>
+            <td th:height="50px" th:width="400px" th:text="${getPolicy.enabled}">Status</td>
+
+        <td>
+            <a th:href="@{/viewDetailedPolicyInformation/{name}(name=${getPolicy.policy_name})}">Details</a>
+            <a th:href="@{/deletePolicy/{name}(name=${getPolicy.policy_name})}">Delete</a>
+            <a th:href="@{/enable/{name}(name=${getPolicy.policy_name})}">Enable</a>
+            <a th:href="@{/disable/{name}(name=${getPolicy.policy_name})}">Disable</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<div >
+    <a class="btn btn-primary btn-lg" th:href="@{/risk_policy}">Main Menu</a>
+</div>
+
+</body>
+</html>
